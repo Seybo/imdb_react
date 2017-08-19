@@ -1,15 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import Movie from './Movie'
 
 class MoviesList extends Component {
   constructor() {
-    super();
-    this.checkStatus = this.checkStatus.bind(this);
-    this.parseJSON = this.parseJSON.bind(this);
-    this.setMoviesSatate = this.setMoviesSatate.bind(this);
+    super()
+    this.checkStatus = this.checkStatus.bind(this)
+    this.parseJSON = this.parseJSON.bind(this)
+    this.setMoviesSatate = this.setMoviesSatate.bind(this)
 
     this.state = {
       movies: []
-    };
+    }
   }
 
   componentDidMount() {
@@ -17,45 +18,45 @@ class MoviesList extends Component {
       accept: 'application/json',
     }).then(this.checkStatus)
       .then(this.parseJSON)
-      .then(this.setMoviesSatate);
+      .then(this.setMoviesSatate)
   }
 
   checkStatus(response) {
     if (response.status >= 200 && response.status < 300) {
-      return response;
+      return response
     }
-    const error = new Error(`HTTP Error ${response.statusText}`);
-    error.status = response.statusText;
-    error.response = response;
-    console.log(error); // eslint-disable-line no-console
-    throw error;
+    const error = new Error(`HTTP Error ${response.statusText}`)
+    error.status = response.statusText
+    error.response = response
+    console.log(error) // eslint-disable-line no-console
+    throw error
   }
 
   parseJSON(response) {
-    return response.json();
+    return response.json()
   }
 
   setMoviesSatate(data) {
-    let movies = [];
+    let movies = []
 
     for (const movie of data) {
-      movies.push(movie);
+      movies.push(movie)
     }
 
-    this.setState({ movies: movies });
+    this.setState({ movies: movies })
   }
 
   render() {
     const moviesList = this.state.movies.map(
-      movie => <li key={movie.id}>{movie.title}</li>
+      movie => <Movie key={ movie.id } title={ movie.title } />
     )
 
     return (
       <ul className="movies-list">
         { moviesList }
       </ul>
-    );
+    )
   }
 }
 
-export default MoviesList;
+export default MoviesList
