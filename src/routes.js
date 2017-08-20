@@ -1,16 +1,16 @@
 import React from 'react';
-import Base from './components/Base';
-// import HomePage from './components/HomePage';
+import HomePage from './components/HomePage';
 import LoginPage from './containers/LoginPage';
 import SignUpPage from './containers/SignUpPage';
-import { Route } from 'react-router-dom';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
+import NavBar from './components/NavBar';
 
 const Layout = () => (
   <BrowserRouter>
     <div className='primary-layout'>
+      <NavBar />
       <main>
-        <Route path='/' exact component={ Base } />
+        <Route path='/' exact component={ HomePage } />
         <Route path='/login' exact component={ LoginPage } />
         <Route path='/signup' exact component={ SignUpPage } />
       </main>

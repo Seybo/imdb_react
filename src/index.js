@@ -3,21 +3,20 @@ import { render } from 'react-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import './styles/index.css';
 import registerServiceWorker from './registerServiceWorker';
-
-import Layout from './routes';
+import App from './App';
 
 registerServiceWorker();
 
 render(
     <MuiThemeProvider>
-      <Layout />
+      <App />
     </MuiThemeProvider>,
     document.getElementById('root')
 );
 
 if (module.hot) {
-  module.hot.accept('./components/App', () => {
-    const NextApp = require('./components/App').default
+  module.hot.accept('./App', () => {
+    const NextApp = require('./App').default
       render(
         <NextApp />,
         document.getElementById('root')
