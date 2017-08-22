@@ -1,13 +1,13 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 class Movie extends Component {
   constructor() {
-    super()
-    this.setColor = this.setColor.bind(this)
+    super();
+    this.setColor = this.setColor.bind(this);
 
     this.state = {
       opened: false
-    }
+    };
   }
 
   render() {
@@ -15,12 +15,12 @@ class Movie extends Component {
       <li onClick={this.setColor} key={this.props.id}>
         { this.props.title }
       </li>
-    )
+    );
   }
 
   setColor() {
-    console.log('It works')
+    console.log('It works');
   }
 }
 
-export default Movie
+export default Movie;

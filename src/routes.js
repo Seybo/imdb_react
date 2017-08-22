@@ -16,6 +16,6 @@ const Layout = () => (
       </main>
     </div>
   </BrowserRouter>
-)
+);
 
 export default Layout;

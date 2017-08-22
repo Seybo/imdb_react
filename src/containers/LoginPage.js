@@ -1,5 +1,6 @@
 import React from 'react';
 import LoginForm from '../components/LoginForm';
+import authenticateUser from '../services/authentication';
 
 class LoginPage extends React.Component {
 
@@ -20,9 +21,7 @@ class LoginPage extends React.Component {
 
   processForm(event) {
     event.preventDefault();
-
-    console.log('email:', this.state.user.email);
-    console.log('password:', this.state.user.password);
+    authenticateUser(this.state.user.name, this.state.user.email, this.state.user.password);
   }
 
   changeUser(event) {

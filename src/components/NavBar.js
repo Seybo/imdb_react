@@ -1,6 +1,6 @@
-import React from 'react'
-import { Link, NavLink } from 'react-router-dom'
-import AppBar from 'material-ui/AppBar'
+import React from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import FlatButton from 'material-ui/FlatButton';
@@ -25,6 +25,6 @@ const NavBar = () => (
       className='test'
     />
   </nav>
-)
+);
 
-export default NavBar
+export default NavBar;

@@ -1,5 +1,6 @@
 import React from 'react';
 import SignUpForm from '../components/SignUpForm';
+import createAccount from '../services/registration';
 
 class SignUpPage extends React.Component {
 
@@ -11,7 +12,7 @@ class SignUpPage extends React.Component {
       user: {
         email: '',
         name: '',
-        password: ''
+        password: '',
       }
     };
 
@@ -31,10 +32,7 @@ class SignUpPage extends React.Component {
 
   processForm(event) {
     event.preventDefault();
-
-    console.log('name:', this.state.user.name);
-    console.log('email:', this.state.user.email);
-    console.log('password:', this.state.user.password);
+    createAccount(this.state.user.name, this.state.user.email, this.state.user.password);
   }
 
   render() {
