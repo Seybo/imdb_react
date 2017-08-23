@@ -1,0 +1,22 @@
+.flexbox {
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  width: 90vw;
+}
+
+.movies-list-heading {
+  text-align: center;
+}
+
+.movies-list {
+  margin: 0 auto;
+  text-align: left;
+  width: 90vw;
+}
+
+.movies-list li {
+  list-style-type: none;
+}
