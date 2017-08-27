@@ -33,7 +33,7 @@ class SignUpPage extends React.Component {
 
   processForm(event) {
     event.preventDefault();
-    const user = this.state.user;
+
     this.createAccount();
   }
 

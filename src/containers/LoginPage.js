@@ -49,7 +49,7 @@ class LoginPage extends React.Component {
 
       checkResponseStatus(response, 200);
       saveAuthorizationToken(response);
-      this.props.changeUser(user.name, user.email);
+      this.props.changeUser(this.state.user.email);
 
     }).catch(function(err) {
       console.log('Fetch Error:', err);

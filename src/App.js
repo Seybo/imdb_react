@@ -7,7 +7,6 @@ class App extends Component {
 
     this.state = {
       user: {
-        name: null,
         email: null
       }
     };
