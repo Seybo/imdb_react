@@ -1,6 +1,6 @@
 import React from 'react';
 import LoginForm from '../components/LoginForm';
-import authenticateUser from '../services/authentication';
+import { checkResponseStatus, saveAuthorizationToken } from '../helpers/userHelpers';
 
 class LoginPage extends React.Component {
 
@@ -17,11 +17,7 @@ class LoginPage extends React.Component {
 
     this.processForm = this.processForm.bind(this);
     this.changeUser = this.changeUser.bind(this);
-  }
-
-  processForm(event) {
-    event.preventDefault();
-    authenticateUser(this.state.user.name, this.state.user.email, this.state.user.password);
+    this.authenticateUser = this.authenticateUser.bind(this);
   }
 
   changeUser(event) {
@@ -31,6 +27,32 @@ class LoginPage extends React.Component {
 
     this.setState({
       user
+    });
+  }
+
+  processForm(event) {
+    event.preventDefault();
+
+    this.authenticateUser();
+  }
+
+  authenticateUser() {
+    const user = this.state.user;
+
+    fetch('/api/v1/auth/login', {
+
+      method: 'post',
+      headers: { "Content-type": "application/x-www-form-urlencoded; charset=UTF-8" },
+      body: `email=${user.email}&password=${user.password}`
+
+    }).then( (response) => {
+
+      checkResponseStatus(response, 200);
+      saveAuthorizationToken(response);
+      this.props.changeUser(user.name, user.email);
+
+    }).catch(function(err) {
+      console.log('Fetch Error:', err);
     });
   }
 

@@ -6,14 +6,18 @@ import MoviesPage from './containers/MoviesPage';
 import { BrowserRouter, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
 
-const Layout = () => (
+const Layout = (props) => (
   <BrowserRouter>
     <div className='primary-layout'>
-      <NavBar />
+      <NavBar {...props} />
       <main>
         <Route path='/' exact component={ HomePage } />
-        <Route path='/login' exact component={ LoginPage } />
-        <Route path='/signup' exact component={ SignUpPage } />
+        <Route exact path='/login' render={() => (
+          <LoginPage {...props} />
+        )}/>
+        <Route exact path='/signup' render={() => (
+          <SignUpPage {...props} />
+        )}/>
         <Route path='/movies' exact component={ MoviesPage } />
       </main>
     </div>

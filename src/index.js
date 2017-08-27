@@ -8,18 +8,18 @@ import App from './App';
 registerServiceWorker();
 
 render(
-    <MuiThemeProvider>
-      <App />
-    </MuiThemeProvider>,
-    document.getElementById('root')
+  <MuiThemeProvider>
+    <App />
+  </MuiThemeProvider>,
+  document.getElementById('root')
 );
 
 if (module.hot) {
   module.hot.accept('./App', () => {
     const NextApp = require('./App').default;
-      render(
-        <NextApp />,
-        document.getElementById('root')
-      );
+    render(
+      <NextApp />,
+      document.getElementById('root')
+    );
   });
 }

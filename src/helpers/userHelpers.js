@@ -5,8 +5,9 @@ export function checkResponseStatus(response, successCode) {
   }
 }
 
-export function savaAuthorizationToken(response) {
+export function saveAuthorizationToken(response) {
   response.json().then( function(data) {
     localStorage.setItem('token', data.auth_token);
   });
 }
+
