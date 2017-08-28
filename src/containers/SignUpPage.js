@@ -1,5 +1,7 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import SignUpForm from '../components/SignUpForm';
+import PropTypes from 'prop-types';
 import { checkResponseStatus, saveAuthorizationToken } from '../helpers/userHelpers';
 
 class SignUpPage extends React.Component {
@@ -9,6 +11,7 @@ class SignUpPage extends React.Component {
 
     this.state = {
       errors: {},
+      redirect: false,
       user: {
         name: '',
         email: '',
@@ -50,6 +53,8 @@ class SignUpPage extends React.Component {
 
       checkResponseStatus(response, 201);
       saveAuthorizationToken(response);
+      this.props.changeUser(this.state.user.email);
+      this.setState({ redirect: true });
 
     }).catch(function(err) {
       console.log('Fetch Error:', err);
@@ -57,6 +62,12 @@ class SignUpPage extends React.Component {
   }
 
   render() {
+    if(this.state.redirect) {
+      return (
+        <Redirect to='/' />
+      );
+    }
+
     return (
       <SignUpForm
         onSubmit={this.processForm}
@@ -68,5 +79,9 @@ class SignUpPage extends React.Component {
   }
 
 }
+
+SignUpPage.propTypes = {
+  changeUser: PropTypes.object.isRequired,
+};
 
 export default SignUpPage;
