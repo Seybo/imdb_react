@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import LoginForm from '../components/LoginForm';
-import { checkResponseStatus, saveAuthorizationToken } from '../helpers/userHelpers';
+import { saveAuthorizationToken } from '../helpers/userHelpers';
+import { ERRORS } from '../helpers/responses';
 
 class LoginPage extends React.Component {
 
@@ -21,6 +22,7 @@ class LoginPage extends React.Component {
     this.processForm = this.processForm.bind(this);
     this.changeUser = this.changeUser.bind(this);
     this.authenticateUser = this.authenticateUser.bind(this);
+    this.loginWasSuccessful = this.loginWasSuccessful.bind(this);
   }
 
   changeUser(event) {
@@ -50,7 +52,8 @@ class LoginPage extends React.Component {
 
     }).then( (response) => {
 
-      checkResponseStatus(response, 200);
+      if (!this.loginWasSuccessful(response.status)) return;
+
       saveAuthorizationToken(response);
       this.props.changeUser(this.state.user.email);
       this.setState({ redirect: true });
@@ -58,6 +61,14 @@ class LoginPage extends React.Component {
     }).catch(function(err) {
       console.log('Fetch Error:', err);
     });
+  }
+
+  loginWasSuccessful(response_code) {
+    if(response_code !== 200) {
+      this.setState({ errors: { "summary": ERRORS[response_code] } });
+      return false;
+    }
+    return true;
   }
 
   render() {
