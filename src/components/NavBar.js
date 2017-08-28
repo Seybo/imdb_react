@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
@@ -12,6 +14,7 @@ function handleTouchTap() {
 }
 
 class LoggedIn extends Component {
+
   constructor(props) {
     super(props);
 
@@ -35,16 +38,17 @@ class LoggedIn extends Component {
         <MenuItem primaryText="Help" />
         <MenuItem primaryText="Sign out" onClick={ this.logout } />
       </IconMenu>
-    )
+    );
   }
-};
+
+}
 
 class Login extends Component {
   static muiName = 'FlatButton';
 
   render() {
     return (
-      <FlatButton label="Login" />
+      <FlatButton label="Login" containerElement={ <Link to="/login/" /> } />
     );
   }
 }
@@ -61,7 +65,17 @@ class NavBar extends React.Component {
           className='test'
         />
       </nav>
-    )};
+    );
+  }
+}
+
+LoggedIn.propTypes = {
+  changeUser: PropTypes.object.isRequired,
+  user: PropTypes.string.isRequired,
+};
+
+NavBar.propTypes = {
+  user: PropTypes.string.isRequired,
 };
 
 export default NavBar;
