@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import SignUpForm from '../components/SignUpForm';
-import { saveAuthorizationToken } from '../helpers/userHelpers';
+import Auth from '../helpers/Auth';
 import { ERRORS } from '../helpers/responses';
 
 class SignUpPage extends React.Component {
@@ -55,7 +55,7 @@ class SignUpPage extends React.Component {
 
       if (!this.signupWasSuccessful(response.status)) return;
 
-      saveAuthorizationToken(response);
+      Auth.authenticateUser(response);
       this.props.changeUser(this.state.user.email);
       this.setState({ redirect: true });
 
@@ -92,7 +92,7 @@ class SignUpPage extends React.Component {
 }
 
 SignUpPage.propTypes = {
-  changeUser: PropTypes.object.isRequired,
+  changeUser: PropTypes.func.isRequired,
 };
 
 export default SignUpPage;

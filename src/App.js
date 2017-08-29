@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Auth from './helpers/Auth';
 import Layout from './routes';
 
 class App extends Component {
@@ -12,6 +13,30 @@ class App extends Component {
     };
 
     this.changeUser = this.changeUser.bind(this);
+    this.getUserProfile = this.getUserProfile.bind(this);
+    this.parseJSON = this.parseJSON.bind(this);
+    this.updateUserState = this.updateUserState.bind(this);
+  }
+
+  componentWillMount() {
+    if(Auth.userIsAuthenticated()) this.getUserProfile();
+  }
+
+  getUserProfile() {
+    fetch(`/api/v1/profile`, {
+      headers: { 'Authorization': Auth.getToken() },
+      accept: 'application/json',
+    }).then(this.checkStatus)
+      .then(this.parseJSON)
+      .then(this.updateUserState);
+  }
+
+  parseJSON(response) {
+    return response.json();
+  }
+
+  updateUserState(data) {
+    this.setState({ user: { email: data.email } });
   }
 
   changeUser(email) {

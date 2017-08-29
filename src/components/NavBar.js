@@ -29,7 +29,7 @@ class LoggedIn extends Component {
     return(
       <IconMenu
         iconButtonElement={
-          <IconButton><MoreVertIcon /></IconButton>
+          <IconButton><MoreVertIcon color={'#FFFFFF'} /></IconButton>
         }
         targetOrigin={{horizontal: 'right', vertical: 'top'}}
         anchorOrigin={{horizontal: 'right', vertical: 'top'}}
@@ -48,7 +48,8 @@ class Login extends Component {
 
   render() {
     return (
-      <FlatButton label="Login" containerElement={ <Link to="/login/" /> } />
+      // strange wrong padding without height and lineHeight adjustment
+      <FlatButton label="Login" style={{ color: '#FFFFFF', height: '48px', lineHeight: '48px' }} containerElement={ <Link to="/login/" /> } />
     );
   }
 }
@@ -70,12 +71,12 @@ class NavBar extends React.Component {
 }
 
 LoggedIn.propTypes = {
-  changeUser: PropTypes.object.isRequired,
-  user: PropTypes.string.isRequired,
+  changeUser: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
 };
 
 NavBar.propTypes = {
-  user: PropTypes.string.isRequired,
+  user: PropTypes.object.isRequired,
 };
 
 export default NavBar;
